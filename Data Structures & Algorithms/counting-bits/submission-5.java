@@ -1,0 +1,21 @@
+class Solution {
+    public int[] countBits(int n) {
+        int[] res = new int[n + 1];
+
+        for (int i = 0; i <= n; i++) {
+            int counter = 0;
+            int num = i;
+
+            for (int j = 0; j < 32; j++) {
+                if ((num & 1) == 1) {
+                    counter += 1;
+                }
+                num >>= 1;
+            }
+
+            res[i] = counter;
+        }
+
+        return res;
+    }
+}
