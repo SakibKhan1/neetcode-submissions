@@ -1,0 +1,29 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        #create a hashmap where coursenum: lists of prereqs
+
+        hashmap = {i: [] for i in range(numCourses)}
+        visited = set() 
+        for crs, prereq in prerequisites:
+            hashmap[crs].append(prereq)
+
+        def dfs(crs):
+            if hashmap[crs] == []:
+                return True 
+
+            if crs in visited:
+                return False 
+            
+            visited.add(crs) 
+
+            for prereq in hashmap[crs]:
+                if not dfs(prereq):
+                    return False
+            return True 
+
+
+        for c in range(numCourses):
+            if dfs(c) == False:
+                return False
+        return True 
+            
